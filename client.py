@@ -10,9 +10,9 @@ def sendCommand(data):
 	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as UDPClient:
 		UDPClient.connect((HOST, PORT))
 		UDPClient.sendall(data)
+		return UDPClient.recv(4096)
 
 if __name__ == '__main__':
 	inPut = input(">>> ")
-	data = readCommand(inPut)
-	data = str(data)
-	sendCommand(data.encode())
+	data = str(readCommand(inPut))
+	print(sendCommand(data.encode()))

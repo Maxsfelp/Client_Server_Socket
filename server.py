@@ -3,6 +3,10 @@ import pickle
 
 HOST = '127.0.0.1'
 PORT = 65432
+nome = []
+sexo = []
+idade = []
+dados = []
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as UDPServer:
     UDPServer.bind((HOST, PORT))
@@ -18,12 +22,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as UDPServer:
                 break;
             data.decode('utf-8')
             data = eval(data)
-            print(data)
-
-# nome = ["Felipe", "Pedro"]
-# sexo = ["masc", "masc"]
-# idade = [21, 21]
-
-# dados = [nome, sexo, idade]
-
-# print(dados)
+            if data[0] == 'SELECT*':
+                if len(dados) != 0:
+                    conn.sendall(dados.encode())
+            else:
+                nome.append(data[1])
+                sexo.append(data[2])
+                idade.append(data[3])
+                dados = [nome, sexo, idade]
+                dados = str(dados)
+                conn.sendall(dados.encode())
