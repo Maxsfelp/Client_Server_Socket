@@ -1,8 +1,5 @@
 import socket
-import pickle
 
-HOST = '127.0.0.1'
-PORT = 65432
 nome = []
 sexo = []
 idade = []
@@ -14,7 +11,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as UDPServer:
     conn, addr = UDPServer.accept()
     
     with conn:
-        print('Connected by', addr)
         
         while True:
             data = conn.recv(4096)
