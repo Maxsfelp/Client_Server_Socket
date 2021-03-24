@@ -6,9 +6,8 @@ idade = []
 dados = []
 
 def sendData(conn, dados):
-    if len(dados) != 0:
-        dados = str(dados)
-        conn.sendall(dados.encode())
+    dados = str(dados).encode()
+    conn.sendall(dados)
 
 def saveData(data):
     nome.append(data[1])
@@ -34,7 +33,5 @@ UDPServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 UDPServer.bind((HOST, PORT))
 UDPServer.listen()
 conn, addr = UDPServer.accept()
-while 1:
+while True:
     dados = recvData(conn, dados)
-conn.close()
-UDPServer.close()
