@@ -25,7 +25,10 @@ while True:
 		recvData()
 	elif split[0] == 'INSERT':
 		sendCommand(data)
-	else:
+	elif split[0] == 'EXIT':
+		sendCommand(data)
 		break
+	else:
+		print("Comando errado")
 UDPClient.close()
 	
